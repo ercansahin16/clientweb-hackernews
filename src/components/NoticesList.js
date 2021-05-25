@@ -18,13 +18,13 @@ export class NoticesList extends React.Component {
 
   render() {
     return (
-      <ul>
-      {this.state.notices.map((notice) => (
-        <Notice
-          title={notice.title}
-        />
-      ))}
-      </ul>
+        <ul style={{backgroundColor: '#dfeff1'}}>
+        {this.state.notices.map((notice) => (
+          <Notice
+            title={notice.title}
+          />
+        ))}
+        </ul>
     );
   }
 }
