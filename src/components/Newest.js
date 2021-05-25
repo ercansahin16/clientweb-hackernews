@@ -1,5 +1,6 @@
 import React from "react";
 import {Notice} from './Notice';
+import { View } from 'react-native-web';
 
 export class NewestList extends React.Component {
 
@@ -18,14 +19,18 @@ export class NewestList extends React.Component {
 
   render() {
     return (
-      <ul style={{backgroundColor: '#dfeff1'}}>
-      <br></br>
-      {this.state.notices.map((notice) => (
-        <Notice
-          title={notice.title}
-        />
-      ))}
-      </ul>
+      <View style={{backgroundColor: '#dfeff1'}}>
+
+        <ul style={{backgroundColor: '#dfeff1'}}>
+        <br></br>
+        {this.state.notices.map((notice) => (
+          <Notice
+            title={notice.title}
+          />
+        ))}
+        </ul>
+
+      </View>
     );
   }
 }

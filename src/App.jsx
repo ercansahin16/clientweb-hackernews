@@ -9,7 +9,7 @@ import { Route, Switch } from 'react-router-dom';
 export function App(){
 
   return(
-    <div className="App">
+    <div style = {{height:"100vh", backgroundColor: '#dfeff1'}} className="App">
       <Navigation/>
       <Switch>
          <Route path='/notices' component={NoticesList}/>
