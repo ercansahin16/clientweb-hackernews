@@ -33,7 +33,7 @@ export class Notice extends React.Component {
   render() {
     return (
       <View>
-        <h1>{this.props.title}</h1>
+        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1>
         <View style={styles.contentView}>
           <TouchableOpacity
               onPress={() => this.likeDislike()}>
@@ -44,6 +44,7 @@ export class Notice extends React.Component {
               onPress={() => this.gocomments()}>
                   <Text style={styles.subtext}> {this.state.comments} comments</Text>
           </TouchableOpacity>
+          <br></br>
         </View>
       </View>
     )

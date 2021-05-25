@@ -18,7 +18,8 @@ export class NewestList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <ul style={{backgroundColor: '#dfeff1'}}>
+      <br></br>
       {this.state.notices.map((notice) => (
         <Notice
           title={notice.title}
