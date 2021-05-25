@@ -3,18 +3,20 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
 import {NoticesList} from './components/NoticesList.js'
 import {NewestList} from './components/Newest.js'
 import {AskList} from './components/Ask.js'
-import {Index} from './components/index.js'
+import {Navigation} from './components/Navigation.js'
+import { Route, Switch } from 'react-router-dom';
 
 export function App(){
 
   return(
-    <View>
-      <Index />
-      <NoticesList />
-      <Text  style={{fontSize: 30, color: 'red'}} >HOLAAAAA NEWESSTTTTTT</Text>
-      <NewestList />
-      <Text  style={{fontSize: 30, color: 'red'}} >HOLAAAAA ASKKKKKK</Text>
-      <AskList />
-    </View>
+    <div className="App">
+      <Navigation/>
+      <Switch>
+         <Route path='/notices' component={NoticesList}/>
+         <Route path='/newest' component={NewestList}/>
+         <Route path='/ask' component={AskList}/>
+      </Switch>
+    </div>
+
   );
 }

@@ -5,7 +5,7 @@ export class NoticesList extends React.Component {
 
   state = {
     loading: true,
-    notices: [],
+    notices: []
   };
 
   async componentDidMount(){
