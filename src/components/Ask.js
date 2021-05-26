@@ -22,7 +22,13 @@ export class AskList extends React.Component {
       <br></br>
       {this.state.notices.map((notice) => (
         <Notice
-          title={notice.title}
+        title={notice.title}
+        id={notice.id}
+        votes={notice.votes}
+        author={notice.author}
+        user_id={notice.user.id}
+        createdAt={notice.created_at}
+        comments={notice.comments}
         />
       ))}
       </ul>
