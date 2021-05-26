@@ -11,7 +11,11 @@ export class Notice extends React.Component {
     author: 'author',
     createdAt: 'canviar',
     comments: 0,
-    liked: false
+    liked: false,
+    user: {
+      id: 0,
+      username: ''
+    }
   }
 
   incrementId = () => {
@@ -42,9 +46,11 @@ export class Notice extends React.Component {
               onPress={() => this.likeDislike()}>
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.votes} | Created by: {this.state.author} | Created at: {this.state.createdAt} </Text>
+          <Text style={styles.subtext}>Votes: {this.props.votes} | </Text>
+          <Link to={{pathname:`/users/${this.props.user_id}`}}> <Text  style={styles.subtext}> Created by: {this.props.author} </Text></Link>
+          <Text style={styles.subtext}> | Created at: {this.props.createdAt} </Text>
           <TouchableOpacity>
-                  <Link to={{pathname:`/comments/${this.state.id}`}}> <Text  style={styles.subtext}> {this.state.comments} comments  </Text></Link>
+                  <Link to={{pathname:`/comments/${this.props.id}`}}> <Text  style={styles.subtext}> {this.props.comments.length} comments  </Text></Link>
           </TouchableOpacity>
           <br></br>
         </View>
