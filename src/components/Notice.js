@@ -47,8 +47,8 @@ export class Notice extends React.Component {
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
           <Text style={styles.subtext}>Votes: {this.props.votes} | </Text>
-          <Link to={{pathname:`/users/${this.props.user_id}`}}> <Text  style={styles.subtext}> Created by: {this.props.author} </Text></Link>
-          <Text style={styles.subtext}> | Created at: {this.props.createdAt} </Text>
+          <Link to={{pathname:`/users/${this.props.user_id}`}}> <Text  style={styles.subtext}> Created by: {this.props.author}</Text></Link>
+          <Text style={styles.subtext}> | Created at: {this.props.createdAt} | </Text>
           <TouchableOpacity>
                   <Link to={{pathname:`/comments/${this.props.id}`}}> <Text  style={styles.subtext}> {this.props.comments.length} comments  </Text></Link>
           </TouchableOpacity>
@@ -69,6 +69,7 @@ title: {
 subtext: {
   fontFamily: 'Verdana, Geneva, sans-serif',
   fontSize:  10,
+  display: 'flex',
   color: '#828282',
 },
 contentView: {
