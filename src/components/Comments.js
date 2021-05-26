@@ -108,6 +108,7 @@ export class Comments extends React.Component {
           <SingleComment
             text={comment.text}
             author={comment.author}
+            id={comment.id}
           />
         ))}
       </View>

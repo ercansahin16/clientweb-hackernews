@@ -5,6 +5,32 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
 
 export class SingleComment extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: {
+        id: 1,
+        title: '',
+        author: '',
+        url: '',
+        content: '',
+        votes: 1,
+        created_at: '',
+        updated_at: '',
+        comments: [],
+      }
+    };
+
+  }
+
+  async componentDidMount(){
+    const url = `https://project-asw.herokuapp.com/comments/${this.props.id}.json`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data.comment_ids);
+
+  }
+
   render() {
     const count = 0;
     return (

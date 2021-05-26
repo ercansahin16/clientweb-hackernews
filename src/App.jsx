@@ -25,6 +25,7 @@ export class App extends React.Component {
            <Route path='/comments' component={Comments}/>
            <Route path='/submit' component={Submit}/>
            <Route path='/threads' component={Threads}/>
+           <Route path='/' component={NoticesList}/>
         </Switch>
       </div>
     );
