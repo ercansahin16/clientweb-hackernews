@@ -13,6 +13,7 @@ export class Navigation extends React.Component {
               <Nav>
                 <Nav.Link href='/notices'>Notices</Nav.Link>
                 <Nav.Link href='/newest'>Newest</Nav.Link>
+                <Nav.Link href='/threads/1'>Threads</Nav.Link>
                 <Nav.Link href='/ask'>Ask</Nav.Link>
                 <Nav.Link href='/submit'>Submit</Nav.Link>
                 <Nav.Link href='/users/1'>User Profiles</Nav.Link>

@@ -6,6 +6,7 @@ import {AskList} from './components/Ask.js'
 import {User} from './components/User.js'
 import {Navigation} from './components/Navigation.js'
 import {Submit} from './components/Submit.js'
+import {Threads} from './components/Threads.js';
 import { Route, Switch } from 'react-router-dom';
 import {Comments} from './components/Comments.js';
 
@@ -23,6 +24,7 @@ export class App extends React.Component {
            <Route path='/users' component={User}/>
            <Route path='/comments' component={Comments}/>
            <Route path='/submit' component={Submit}/>
+           <Route path='/threads' component={Threads}/>
         </Switch>
       </div>
     );
