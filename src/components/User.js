@@ -86,7 +86,7 @@ export class User extends React.Component {
                   </div>
                   <div class="row">
                     <textarea name="about" value={this.state.user.about} onChange={this.handleChange} placeholder="Write something about you..."></textarea>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Update" />
                   </div>
                   </form>
                     <br></br>
