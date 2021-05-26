@@ -5,10 +5,10 @@ import {NewestList} from './components/Newest.js'
 import {AskList} from './components/Ask.js'
 import {User} from './components/User.js'
 import {Navigation} from './components/Navigation.js'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom'
+import {Comments} from './components/Comments.js';
 
 export function App(){
-
   return(
     <div style = {{height:"100vh", backgroundColor: '#dfeff1'}} className="App">
       <Navigation/>
@@ -17,6 +17,7 @@ export function App(){
          <Route path='/newest' component={NewestList}/>
          <Route path='/ask' component={AskList}/>
          <Route path='/users' component={User}/>
+         <Route path='/comments' component={Comments}/>
       </Switch>
     </div>
 
