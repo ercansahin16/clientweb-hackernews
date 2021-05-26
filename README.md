@@ -1,10 +1,10 @@
 # ASW React Client Web
 
 # TEAM
-Dídac Claria
-Agnés Masip
-Maria Nievas
-Carlos Sansón
-Emma Pereira
+Dídac Claria <br />
+Agnés Masip <br />
+Maria Nievas <br />
+Carlos Sansón <br />
+Emma Pereira <br />
 
 # deploy URL
