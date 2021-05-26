@@ -89,6 +89,8 @@ export class Comments extends React.Component {
     return (
       <View style={styles.paddings}>
         <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.state.notice.title}</h1>
+        <br></br>
+        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 13}}>{this.state.notice.content}</h1>
         <View style={styles.contentView}>
           <TouchableOpacity
               onPress={() => this.likeDislike()}>

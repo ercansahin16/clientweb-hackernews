@@ -15,7 +15,8 @@ export class Notice extends React.Component {
     user: {
       id: 0,
       username: ''
-    }
+    },
+    errorMessage: ''
   }
 
   incrementId = () => {
@@ -34,9 +35,40 @@ export class Notice extends React.Component {
       this.setState(prevState => ({liked: false}))
       this.setState(prevState => ({vote: '<3'}))
     }
+    this.handlePutLike()
   }
 
 
+  handlePutLike = () => {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia', 'Accept': 'application/json'},
+    };
+    let likedpost = 'like'
+    if (this.state.liked) likedpost = 'dislike'
+
+    fetch(`https://project-asw.herokuapp.com/notices/${this.state.id}/${likedpost}`, requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type').includes('application/json');
+            const data = isJson && await response.json();
+
+            console.log(response)
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response status
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+
+            //this.setState(prevState => ({votes: data.votes}))
+
+        })
+        .catch(error => {
+            this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });
+  }
 
   render() {
     return (
