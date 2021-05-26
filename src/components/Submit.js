@@ -23,7 +23,6 @@ export class Submit extends React.Component {
   }
 
   handleSubmit(event) {
-  console.log( this.state);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia' },

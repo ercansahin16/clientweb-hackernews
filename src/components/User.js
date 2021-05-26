@@ -29,24 +29,10 @@ export class User extends React.Component {
     console.log(data);
   }
 
-  likeDislike = () => {
-    //if(this.state.votes === 25) this.setState(prevState => ({minutes: 24}))
-    if(!this.state.liked) {
-      this.setState(prevState => ({votes: prevState.votes + 1}))
-      this.setState(prevState => ({liked: true}))
-      this.setState(prevState => ({vote: '</3'}))
-    }
-    else {
-      this.setState(prevState => ({votes: prevState.votes - 1}))
-      this.setState(prevState => ({liked: false}))
-      this.setState(prevState => ({vote: '<3'}))
-    }
-  }
-
   render() {
     return (
         <ul style={{backgroundColor: '#dfeff1'}}>
-            <View>
+            <View style={styles.paddings}>
                 <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.state.user.username}</h1>
                 <Text> {this.state.user.about} </Text>
                 <View style={styles.contentView}>
@@ -82,5 +68,8 @@ vote: {
   fontFamily: 'Verdana, Geneva, sans-serif',
   fontSize:  10,
   color: 'blue',
+},
+paddings: {
+  padding: 30
 }
 });

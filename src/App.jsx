@@ -14,7 +14,7 @@ export class App extends React.Component {
 
   render() {
     return(
-      <div style = {{height:"100vh", backgroundColor: '#dfeff1'}} className="App">
+      <div style = {{minHeight: "100vh",backgroundColor: '#dfeff1'}} className="App">
         <Navigation/>
         <Switch>
            <Route path='/notices' component={NoticesList}/>
