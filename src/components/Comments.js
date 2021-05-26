@@ -1,26 +1,37 @@
 import React from "react";
+import {Notice} from './Notice';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import {SingleComment} from './SingleComment';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
-import {Link} from "react-router-dom";
 
-export class Notice extends React.Component {
+export class Comments extends React.Component {
 
   state = {
-    id: 1,
-    vote: '<3',
-    votes: 0,
-    author: 'author',
-    createdAt: 'canviar',
-    comments: 0,
-    liked: false
-  }
+    notice: {
+      id: 1,
+      title: '',
+      author: '',
+      url: '',
+      content: '',
+      votes: 1,
+      created_at: '',
+      updated_at: '',
+      comments: []
+    }
+  };
 
-  incrementId = () => {
-    this.setState(prevState => ({id: prevState.id + 1}))
+  async componentDidMount(){
+    const id = window.location.pathname.replace('/comments/','');
+    console.log(`id = ${id}`);
+    const url = `https://project-asw.herokuapp.com/notices/${id}.json`;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({notice: data});
+    console.log(data);
   }
 
   likeDislike = () => {
-    //if(this.state.votes === 25) this.setState(prevState => ({minutes: 24}))
-    if(!this.state.liked) {
+    if(!this.state.notice.liked) {
       this.setState(prevState => ({votes: prevState.votes + 1}))
       this.setState(prevState => ({liked: true}))
       this.setState(prevState => ({vote: '</3'}))
@@ -32,26 +43,31 @@ export class Notice extends React.Component {
     }
   }
 
-
   render() {
+    const count = 0;
     return (
       <View>
-        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1>
+        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.state.notice.title}</h1>
         <View style={styles.contentView}>
           <TouchableOpacity
               onPress={() => this.likeDislike()}>
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.votes} | Created by: {this.state.author} | Created at: {this.state.createdAt} </Text>
-          <TouchableOpacity>
-                  <Link to={{pathname:`/comments/${this.state.id}`}}> <Text  style={styles.subtext}> {this.state.comments} comments  </Text></Link>
-          </TouchableOpacity>
+          <Text style={styles.subtext}>Votes: {this.state.notice.votes} | Created by: {this.state.notice.author} | Created at: {this.state.notice.created_at} </Text>
           <br></br>
         </View>
+        <br></br>
+        {this.state.notice.comments.map((comment) => (
+          <SingleComment
+            text={comment.text}
+            author={comment.author}
+          />
+        ))}
       </View>
-    )
+    );
   }
 }
+
 
 const styles = StyleSheet.create({
 title: {

@@ -1,21 +1,32 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
-import {Link} from "react-router-dom";
 
-export class Notice extends React.Component {
+export class User extends React.Component {
 
   state = {
-    id: 1,
-    vote: '<3',
-    votes: 0,
-    author: 'author',
-    createdAt: 'canviar',
-    comments: 0,
-    liked: false
+
+    comments: [],
+      loading: true,
+      user: {
+        id: 1,
+        username: "",
+        about: "",
+        email: "",
+        uid: "",
+        provider: "",
+        created_at: "",
+        updated_at: "",
+        url: ""
+      }
   }
 
-  incrementId = () => {
-    this.setState(prevState => ({id: prevState.id + 1}))
+  async componentDidMount(){
+    const id = window.location.pathname.replace('/users/','');
+    const url = `https://project-asw.herokuapp.com/users/${id}.json`;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({user: data});
+    console.log(data);
   }
 
   likeDislike = () => {
@@ -32,23 +43,18 @@ export class Notice extends React.Component {
     }
   }
 
-
   render() {
     return (
-      <View>
-        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1>
-        <View style={styles.contentView}>
-          <TouchableOpacity
-              onPress={() => this.likeDislike()}>
-                  <Text style={styles.vote}> {this.state.vote} </Text>
-          </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.votes} | Created by: {this.state.author} | Created at: {this.state.createdAt} </Text>
-          <TouchableOpacity>
-                  <Link to={{pathname:`/comments/${this.state.id}`}}> <Text  style={styles.subtext}> {this.state.comments} comments  </Text></Link>
-          </TouchableOpacity>
-          <br></br>
-        </View>
-      </View>
+        <ul style={{backgroundColor: '#dfeff1'}}>
+            <View>
+                <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.state.user.username}</h1>
+                <Text> {this.state.user.about} </Text>
+                <View style={styles.contentView}>
+                    <Text style={styles.subtext}>Email: {this.state.user.email} | Created at: {this.state.user.created_at}</Text>
+                    <br></br>
+                </View>
+            </View>
+        </ul>
     )
   }
 }
