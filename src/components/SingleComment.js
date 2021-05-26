@@ -5,10 +5,26 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
 
 export class SingleComment extends React.Component {
 
-  state = {
-    vote: '<3',
-    votes: this.props.votes,
-    liked: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: {
+        id: 1,
+        title: '',
+        author: '',
+        url: '',
+        content: '',
+        votes: 1,
+        created_at: '',
+        updated_at: '',
+        comments: [],
+      },
+      vote: '<3',
+      votes: this.props.votes,
+      liked: false,
+      replies: []
+    };
+
   }
 
   likeDislike = () => {
@@ -25,6 +41,24 @@ export class SingleComment extends React.Component {
     }
   }
 
+  async componentDidMount(){
+    const url = `https://project-asw.herokuapp.com/comments/${this.props.id}.json`;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({comment: data});
+    console.log(data.comment_ids);
+    if (data.comment_ids){
+      const repliesAux = data.comment_ids.map(async (reply) =>  {
+        const url = `https://project-asw.herokuapp.com/comments/${reply}.json`;
+        const response = await fetch(url);
+        const data = await response.json();
+        var newArr = this.state.replies;
+        newArr.push(data);
+        this.setState({replies:newArr});
+      });
+    }
+  }
+
   render() {
     const count = 0;
     return (
@@ -35,9 +69,20 @@ export class SingleComment extends React.Component {
               onPress={() => this.likeDislike()}>
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.votes} | Created by: {this.props.author} | Created at: {this.props.created_at}</Text>
+          <Text style={styles.subtext}>Votes: {this.state.votes} | Created by: {this.props.author} | <a href={`/reply/${this.state.comment.id}`}>Reply</a></Text>
           <br></br>
         </View>
+        <div style={{marginLeft: 30}}>
+          {this.state.replies.map((comment) => (
+            <SingleComment
+              text={comment.text}
+              author={comment.author}
+              id={comment.id}
+              created_at={comment.created_at}
+              votes={comment.votes}
+            />
+          ))}
+        </div>
       </View>
     );
   }

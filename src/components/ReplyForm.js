@@ -4,21 +4,18 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import {SingleComment} from './SingleComment';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
 
-export class Comments extends React.Component {
+export class ReplyForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      notice: {
+      comment: {
         id: 1,
-        title: '',
-        author: '',
-        url: '',
-        content: '',
-        votes: 1,
-        created_at: '',
-        updated_at: '',
-        comments: [],
+        text: "",
+        author: "",
+        votes: 0,
+        notice_id: 0,
+        comment_ids: []
       },
       content: ''
     };
@@ -35,8 +32,8 @@ export class Comments extends React.Component {
   handleSubmit(event) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia' },
-        body: JSON.stringify({ text: this.state.content, notice_id: this.state.notice.id, commentable_id: this.state.notice.id, commentable_type: "Notice" })
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia', 'Accept': 'application/json'},
+        body: JSON.stringify({ text: this.state.content, notice_id: this.state.comment.notice_id, commentable_id: this.state.comment.id, commentable_type: "Comment" })
     };
     fetch('https://project-asw.herokuapp.com/comments.json', requestOptions)
         .then(async response => {
@@ -50,7 +47,7 @@ export class Comments extends React.Component {
                 return Promise.reject(error);
             }
 
-            window.location.reload(false);
+            this.props.history.push(`/comments/${this.state.comment.notice_id}`);
 
         })
         .catch(error => {
@@ -62,12 +59,12 @@ export class Comments extends React.Component {
 
 
   async componentDidMount(){
-    const id = window.location.pathname.replace('/comments/','');
+    const id = window.location.pathname.replace('/reply/','');
     console.log(`id = ${id}`);
-    const url = `https://project-asw.herokuapp.com/notices/${id}.json`;
+    const url = `https://project-asw.herokuapp.com/comments/${id}.json`;
     const response = await fetch(url);
     const data = await response.json();
-    this.setState({notice: data});
+    this.setState({comment: data});
     console.log(data);
   }
 
@@ -88,33 +85,18 @@ export class Comments extends React.Component {
     const count = 0;
     return (
       <View style={styles.paddings}>
-        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.state.notice.title}</h1>
-        <br></br>
-        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 13}}>{this.state.notice.content}</h1>
-        <View style={styles.contentView}>
-          <TouchableOpacity
-              onPress={() => this.likeDislike()}>
-                  <Text style={styles.vote}> {this.state.vote} </Text>
-          </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.notice.votes} | Created by: {this.state.notice.author} | Created at: {this.state.notice.created_at} </Text>
+        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.state.comment.text}</h1>
+        <View>
+          <Text style={styles.subtext}>Votes: {this.state.comment.votes} | Created by: {this.state.comment.author}</Text>
           <br></br>
         </View>
         <br></br>
 
         <form onSubmit={this.handleSubmit}>
-          <textarea name="content" value={this.state.content} onChange={this.handleChange} placeholder="Write a comment.."></textarea>
+          <textarea name="content" value={this.state.content} onChange={this.handleChange} placeholder="Write a reply.."></textarea>
           <input type="submit" value="Submit" />
         </form>
 
-        {this.state.notice.comments.map((comment) => (
-          <SingleComment
-            text={comment.text}
-            author={comment.author}
-            id={comment.id}
-            created_at={comment.created_at}
-            votes={comment.votes}
-          />
-        ))}
       </View>
     );
   }
