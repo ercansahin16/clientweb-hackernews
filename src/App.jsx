@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
 import {NoticesList} from './components/NoticesList.js'
 import {NewestList} from './components/Newest.js'
 import {AskList} from './components/Ask.js'
+import {SubmittedList} from './components/Submitted.js'
 import {User} from './components/User.js'
 import {Navigation} from './components/Navigation.js'
 import {Submit} from './components/Submit.js'
@@ -21,6 +22,7 @@ export class App extends React.Component {
            <Route path='/notices' component={NoticesList}/>
            <Route path='/newest' component={NewestList}/>
            <Route path='/ask' component={AskList}/>
+           <Route path='/submitted' component={SubmittedList}/>
            <Route path='/users' component={User}/>
            <Route path='/comments' component={Comments}/>
            <Route path='/submit' component={Submit}/>

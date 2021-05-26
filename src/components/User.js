@@ -89,10 +89,13 @@ export class User extends React.Component {
                     <input type="submit" value="Submit" />
                   </div>
                   </form>
+                    <br></br>
                   <View style={styles.contentView}>
                       <Text style={styles.subtext}>Email: {this.state.user.email} | Created at: {this.state.user.created_at}</Text>
-                      <br></br>
-                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>comments</Text></Link>
+                  </View>
+                  <View style={styles.contentView}>
+                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>comments </Text></Link>
+                      <Link to={{pathname:`/submitted/${this.state.user.id}`}}> <Text  style={styles.subtext}>| submitted posts</Text></Link>
                   </View>
               </View>
           </ul>
@@ -105,9 +108,11 @@ export class User extends React.Component {
                 <Text> {this.state.user.about} </Text>
                 <View style={styles.contentView}>
                     <Text style={styles.subtext}>Email: {this.state.user.email} | Created at: {this.state.user.created_at}</Text>
-                    <br></br>
-                    <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>comments</Text></Link>
                 </View>
+                <View style={styles.contentView}>
+                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>comments </Text></Link>
+                      <Link to={{pathname:`/submitted/${this.state.user.id}`}}> <Text  style={styles.subtext}>| submitted posts</Text></Link>
+                  </View>
             </View>
         </ul>
     )}
