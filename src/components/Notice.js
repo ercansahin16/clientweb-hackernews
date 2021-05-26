@@ -7,7 +7,7 @@ export class Notice extends React.Component {
   state = {
     id: 1,
     vote: '<3',
-    votes: 0,
+    votes: this.props.votes,
     author: 'author',
     createdAt: 'canviar',
     comments: 0,
@@ -37,6 +37,7 @@ export class Notice extends React.Component {
   }
 
 
+
   render() {
     return (
       <View>
@@ -46,7 +47,7 @@ export class Notice extends React.Component {
               onPress={() => this.likeDislike()}>
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.props.votes} | </Text>
+          <Text style={styles.subtext}>Votes: {this.state.votes} | </Text>
           <Link to={{pathname:`/users/${this.props.user_id}`}}> <Text  style={styles.subtext}> Created by: {this.props.author}</Text></Link>
           <Text style={styles.subtext}> | Created at: {this.props.createdAt} | </Text>
           <TouchableOpacity>

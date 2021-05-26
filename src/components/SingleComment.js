@@ -7,7 +7,7 @@ export class SingleComment extends React.Component {
 
   state = {
     vote: '<3',
-    votes:0,
+    votes: this.props.votes,
     liked: false
   }
 

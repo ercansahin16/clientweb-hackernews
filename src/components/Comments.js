@@ -109,6 +109,7 @@ export class Comments extends React.Component {
             text={comment.text}
             author={comment.author}
             created_at={comment.created_at}
+            votes={comment.votes}
           />
         ))}
       </View>
