@@ -5,13 +5,37 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native-web';
 
 export class SingleComment extends React.Component {
 
+  state = {
+    vote: '<3',
+    votes:0,
+    liked: false
+  }
+
+  likeDislike = () => {
+    //if(this.state.votes === 25) this.setState(prevState => ({minutes: 24}))
+    if(!this.state.liked) {
+      this.setState(prevState => ({votes: prevState.votes + 1}))
+      this.setState(prevState => ({liked: true}))
+      this.setState(prevState => ({vote: '</3'}))
+    }
+    else {
+      this.setState(prevState => ({votes: prevState.votes - 1}))
+      this.setState(prevState => ({liked: false}))
+      this.setState(prevState => ({vote: '<3'}))
+    }
+  }
+
   render() {
     const count = 0;
     return (
       <View>
         <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.text}</h1>
         <View style={styles.contentView}>
-          <Text style={styles.subtext}>Votes:0 | Created by: {this.props.author} | Created at: </Text>
+          <TouchableOpacity
+              onPress={() => this.likeDislike()}>
+                  <Text style={styles.vote}> {this.state.vote} </Text>
+          </TouchableOpacity>
+          <Text style={styles.subtext}>Votes: {this.state.votes} | Created by: {this.props.author} | Created at: {this.props.created_at}</Text>
           <br></br>
         </View>
       </View>
