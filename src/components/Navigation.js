@@ -14,9 +14,10 @@ export class Navigation extends React.Component {
                 <Nav.Link href='/notices'>Notices</Nav.Link>
                 <Nav.Link href='/newest'>Newest</Nav.Link>
                 <Nav.Link href='/ask'>Ask</Nav.Link>
+                <Nav.Link href='/submit'>Submit</Nav.Link>
               </Nav>
             </Navbar.Collapse>
-            
+
           </Container>
         </Navbar>
     );
