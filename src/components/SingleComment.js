@@ -19,6 +19,9 @@ export class SingleComment extends React.Component {
         updated_at: '',
         comments: [],
       },
+      notice: {
+          title: ''
+      },
       vote: '<3',
       votes: this.props.votes,
       liked: false,
@@ -57,6 +60,25 @@ export class SingleComment extends React.Component {
         this.setState({replies:newArr});
       });
     }
+    fetch(`https://project-asw.herokuapp.com/notices/${this.props.noticeId}.json`)
+    .then(async response => {
+      const isJson = response.headers.get('content-type').includes('application/json');
+      const data = isJson && await response.json();
+
+      console.log(response);
+
+      // check for error response
+      if (!response.ok) {
+          // get error message from body or default to response status
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);
+      }
+
+      this.setState({notice: data});
+  })
+  .catch(error => {
+      this.setState({ errorMessage: error.toString() });
+  });
   }
 
   render() {
@@ -69,7 +91,7 @@ export class SingleComment extends React.Component {
               onPress={() => this.likeDislike()}>
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.votes} | Commented by: {this.props.author} | on <a href={`/comments/${this.props.noticeId}`}>{this.props.noticetitle}</a> | <a href={`/reply/${this.props.commentId}`}>Reply</a></Text>
+          <Text style={styles.subtext}>Votes: {this.state.votes} | Commented by: {this.props.author} | on <a href={`/comments/${this.props.noticeId}`}>{this.state.notice.title}</a> | <a href={`/reply/${this.props.commentId}`}>Reply</a></Text>
           <br></br>
         </View>
         <div style={{marginLeft: 30}}>
