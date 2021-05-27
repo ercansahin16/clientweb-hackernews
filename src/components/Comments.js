@@ -110,7 +110,8 @@ export class Comments extends React.Component {
           <SingleComment
             text={comment.text}
             author={comment.author}
-            commentId={comment.id}
+            id={comment.id}
+            votes={comment.votes}
             noticetitle={comment.notice_id}
             noticeId={comment.notice_id}
           />

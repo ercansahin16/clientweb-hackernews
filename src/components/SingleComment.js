@@ -137,7 +137,7 @@ export class SingleComment extends React.Component {
               onPress={() => this.likeDislike()}>
                   <Text style={styles.vote}> {this.state.vote} </Text>
           </TouchableOpacity>
-          <Text style={styles.subtext}>Votes: {this.state.votes} | Commented by: {this.props.author} | on <a href={`/comments/${this.props.noticeId}`}>{this.state.notice.title}</a> | <a href={`/reply/${this.props.commentId}`}>Reply</a></Text>
+          <Text style={styles.subtext}>Votes: {this.state.votes} | Commented by: {this.props.author} | on <a href={`/comments/${this.props.noticeId}`}>{this.state.notice.title}</a> | <a href={`/reply/${this.props.id}`}>Reply</a></Text>
           <br></br>
         </View>
         <div style={{marginLeft: 30}}>
@@ -146,8 +146,9 @@ export class SingleComment extends React.Component {
               text={comment.text}
               author={comment.author}
               id={comment.id}
-              created_at={comment.created_at}
               votes={comment.votes}
+              noticetitle={comment.notice_id}
+              noticeId={comment.notice_id}
             />
           ))}
         </div>
