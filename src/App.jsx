@@ -4,6 +4,8 @@ import {NoticesList} from './components/NoticesList.js'
 import {NewestList} from './components/Newest.js'
 import {AskList} from './components/Ask.js'
 import {SubmittedList} from './components/Submitted.js'
+import {LikedCommentsList} from './components/LikedComments.js'
+import {LikedNoticesList} from './components/LikedNotices.js'
 import {User} from './components/User.js'
 import {Navigation} from './components/Navigation.js'
 import {Submit} from './components/Submit.js'
@@ -26,6 +28,8 @@ export class App extends React.Component {
            <Route path='/submitted' component={SubmittedList}/>
            <Route path='/users' component={User}/>
            <Route path='/comments' component={Comments}/>
+           <Route path='/likedComments' component={LikedCommentsList}/>
+           <Route path='/likedNotices' component={LikedNoticesList}/>
            <Route path='/submit' component={Submit}/>
            <Route path='/threads' component={Threads}/>
            <Route path='/reply' component={ReplyForm}/>
