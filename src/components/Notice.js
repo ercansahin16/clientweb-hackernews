@@ -9,6 +9,7 @@ export class Notice extends React.Component {
     vote: '<3',
     votes: this.props.votes,
     author: 'author',
+    url: '',
     createdAt: 'canviar',
     comments: 0,
     liked: false,
@@ -73,7 +74,9 @@ export class Notice extends React.Component {
   render() {
     return (
       <View>
-        <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1>
+      { console.log(this.props)}
+      { this.props.url!=null && <a href={`${this.props.url}`}><h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1></a> }
+      { this.props.url==null && <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1> }
         <View style={styles.contentView}>
           <TouchableOpacity
               onPress={() => this.likeDislike()}>

@@ -25,6 +25,7 @@ export class NoticesList extends React.Component {
             title={notice.title}
             id={notice.id}
             votes={notice.votes}
+            url={notice.url}
             author={notice.author}
             user_id={notice.user.id}
             createdAt={notice.created_at}
