@@ -94,8 +94,12 @@ export class User extends React.Component {
                       <Text style={styles.subtext}>Email: {this.state.user.email} | Created at: {this.state.user.created_at}</Text>
                   </View>
                   <View style={styles.contentView}>
-                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>comments </Text></Link>
-                      <Link to={{pathname:`/submitted/${this.state.user.id}`}}> <Text  style={styles.subtext}>| submitted posts</Text></Link>
+                      <Link to={{pathname:`/submitted/${this.state.user.id}`}}> <Text  style={styles.subtext}>submitted posts </Text></Link>
+                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>| submitted comments</Text></Link>
+                  </View>
+                  <View style={styles.contentView}>
+                      <Link to={{pathname:`/likedNotices/${this.state.user.id}`}}> <Text  style={styles.subtext}>liked posts </Text></Link>
+                      <Link to={{pathname:`/likedComments/${this.state.user.id}`}}> <Text  style={styles.subtext}>| liked comments (private)</Text></Link>
                   </View>
               </View>
           </ul>
@@ -110,8 +114,8 @@ export class User extends React.Component {
                     <Text style={styles.subtext}>Email: {this.state.user.email} | Created at: {this.state.user.created_at}</Text>
                 </View>
                 <View style={styles.contentView}>
-                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>comments </Text></Link>
-                      <Link to={{pathname:`/submitted/${this.state.user.id}`}}> <Text  style={styles.subtext}>| submitted posts</Text></Link>
+                      <Link to={{pathname:`/submitted/${this.state.user.id}`}}> <Text  style={styles.subtext}>submitted posts </Text></Link>
+                      <Link to={{pathname:`/threads/${this.state.user.id}`}}> <Text  style={styles.subtext}>| submitted comments</Text></Link>
                   </View>
             </View>
         </ul>
