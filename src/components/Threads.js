@@ -38,6 +38,9 @@ export class Threads extends React.Component {
           <SingleComment
             text={comment.text}
             author={comment.author}
+            commentId={comment.id}
+            noticetitle={comment.notice_id}
+            noticeId={comment.notice_id}
           />
         ))}
         </ul>
