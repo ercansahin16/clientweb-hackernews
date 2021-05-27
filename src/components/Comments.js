@@ -113,6 +113,7 @@ export class Comments extends React.Component {
             id={comment.id}
             created_at={comment.created_at}
             votes={comment.votes}
+            noticetitle={comment.id}
           />
         ))}
       </View>
