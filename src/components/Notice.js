@@ -20,25 +20,39 @@ export class Notice extends React.Component {
     errorMessage: ''
   }
 
-  incrementId = () => {
-    this.setState(prevState => ({id: prevState.id + 1}))
-  }
 
   likeDislike = () => {
-    //if(this.state.votes === 25) this.setState(prevState => ({minutes: 24}))
     if(!this.state.liked) {
       this.setState(prevState => ({votes: prevState.votes + 1}))
-      this.setState(prevState => ({liked: true}))
-      this.setState(prevState => ({vote: '</3'}))
+      this.setState(prevState => ({liked: true}));
+      this.setState(prevState => ({vote: '</3'}));
     }
     else {
       this.setState(prevState => ({votes: prevState.votes - 1}))
-      this.setState(prevState => ({liked: false}))
-      this.setState(prevState => ({vote: '<3'}))
+      this.setState(prevState => ({liked: false}));
+      this.setState(prevState => ({vote: '<3'}));
     }
-    this.handlePutLike()
+    this.handlePutLike();
   }
 
+  async componentDidMount(){
+    const requestOptions = {
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia', 'Accept': 'application/json'}
+    };
+    const url = `https://project-asw.herokuapp.com/upvoted/1.json`;
+    const response = await fetch(url,requestOptions);
+    const data = await response.json();
+    console.log(data);
+    data.forEach((item,index) => {
+      if (item.id==this.props.id) this.setState({liked: true});
+    });
+    if(!this.state.liked) {
+      this.setState(prevState => ({vote: '<3'}))
+    }
+    else {
+      this.setState(prevState => ({vote: '</3'}))
+    }
+  }
 
   handlePutLike = () => {
     const requestOptions = {
@@ -48,7 +62,7 @@ export class Notice extends React.Component {
     let likedpost = 'like'
     if (this.state.liked) likedpost = 'dislike'
 
-    fetch(`https://project-asw.herokuapp.com/notices/${this.state.id}/${likedpost}`, requestOptions)
+    fetch(`https://project-asw.herokuapp.com/notices/${this.props.id}/${likedpost}`, requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type').includes('application/json');
             const data = isJson && await response.json();
@@ -74,7 +88,6 @@ export class Notice extends React.Component {
   render() {
     return (
       <View>
-      { console.log(this.props)}
       { this.props.url!=null && <a href={`${this.props.url}`}><h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1></a> }
       { this.props.url==null && <h1 style={{fontFamily: 'Verdana, Geneva, sans-serif', fontSize: 20}}>{this.props.title}</h1> }
         <View style={styles.contentView}>

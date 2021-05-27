@@ -28,27 +28,73 @@ export class SingleComment extends React.Component {
   }
 
   likeDislike = () => {
-    //if(this.state.votes === 25) this.setState(prevState => ({minutes: 24}))
     if(!this.state.liked) {
       this.setState(prevState => ({votes: prevState.votes + 1}))
-      this.setState(prevState => ({liked: true}))
-      this.setState(prevState => ({vote: '</3'}))
+      this.setState(prevState => ({liked: true}));
+      this.setState(prevState => ({vote: '</3'}));
     }
     else {
       this.setState(prevState => ({votes: prevState.votes - 1}))
-      this.setState(prevState => ({liked: false}))
-      this.setState(prevState => ({vote: '<3'}))
+      this.setState(prevState => ({liked: false}));
+      this.setState(prevState => ({vote: '<3'}));
     }
+    this.handlePutLike();
+  }
+
+  handlePutLike = () => {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia', 'Accept': 'application/json'},
+    };
+    let likedpost = 'like'
+    if (this.state.liked) likedpost = 'dislike'
+
+    fetch(`https://project-asw.herokuapp.com/comments/${this.props.id}/${likedpost}`, requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type').includes('application/json');
+            const data = isJson && await response.json();
+
+            console.log(response)
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response status
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+
+            //this.setState(prevState => ({votes: data.votes}))
+
+        })
+        .catch(error => {
+            this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });
   }
 
   async componentDidMount(){
-    const url = `https://project-asw.herokuapp.com/comments/${this.props.id}.json`;
-    const response = await fetch(url);
+    const requestOptions = {
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': 'p3ggo4igayia', 'Accept': 'application/json'}
+    };
+    const url = `https://project-asw.herokuapp.com/upvotedcomments/1.json`;
+    const response = await fetch(url,requestOptions);
     const data = await response.json();
-    this.setState({comment: data});
-    console.log(data.comment_ids);
-    if (data.comment_ids){
-      const repliesAux = data.comment_ids.map(async (reply) =>  {
+    data.forEach((item,index) => {
+      if (item.id==this.props.id) this.setState({liked: true});
+    });
+    if(!this.state.liked) {
+      this.setState(prevState => ({vote: '<3'}))
+    }
+    else {
+      this.setState(prevState => ({vote: '</3'}))
+    }
+
+    const url2 = `https://project-asw.herokuapp.com/comments/${this.props.id}.json`;
+    const response2 = await fetch(url2);
+    const data2 = await response2.json();
+    this.setState({comment: data2});
+    if (data2.comment_ids){
+      const repliesAux = data2.comment_ids.map(async (reply) =>  {
         const url = `https://project-asw.herokuapp.com/comments/${reply}.json`;
         const response = await fetch(url);
         const data = await response.json();
