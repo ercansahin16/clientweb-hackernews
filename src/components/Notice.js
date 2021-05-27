@@ -33,6 +33,7 @@ export class Notice extends React.Component {
       this.setState(prevState => ({vote: '<3'}));
     }
     this.handlePutLike();
+    window.location.reload(false);
   }
 
   async componentDidMount(){
