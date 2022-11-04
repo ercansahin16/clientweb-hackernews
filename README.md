@@ -1,12 +1,13 @@
-## PROJECTE ASW - HACKERNEWS
+## PROJECT ASW - HACKERNEWS
 This is an university project where a clone of the website HackerNews had to be done in two different frameworks and deploy it twice. 
 
 * First step: A Ruby project with all the features HackerNews originally has.
 * Second step: Document the API we created in Ruby in Swagger. (YAML file)
 * Third step: Create a project with a Javascript framework (React).
 
-* Ruby: https://project-asw.herokuapp.com/
-* React: http://client-hackernews.herokuapp.com/
+Ruby: https://project-asw.herokuapp.com/
+
+React: http://client-hackernews.herokuapp.com/
 
 # Features:
 * Log In/Auth Features
