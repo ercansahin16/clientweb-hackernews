@@ -17,6 +17,10 @@ React: http://client-hackernews.herokuapp.com/
 * Comment
 * Thread of comments
 
+# Demo
+![image](https://user-images.githubusercontent.com/55700365/199953943-c5e200b6-1687-40d4-9118-04cf9da7340c.png)
+![image](https://user-images.githubusercontent.com/55700365/199954017-d42baa0d-1868-4068-9d96-caf62f077fbe.png)
+
 # Team:
 
 * Claria, Didac
