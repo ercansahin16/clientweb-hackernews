@@ -28,7 +28,6 @@ This is an university project where a clone of the website HackerNews had to be 
 
 * Sansón, Carlos
 
-Our webapp @ Heroku: <https://project-asw.herokuapp.com/>
 
 # Directories:
 
