@@ -33,6 +33,7 @@ React: http://client-hackernews.herokuapp.com/
 
 * Sansón, Carlos
 
+* Masip, Maria
 
 # Directories:
 
